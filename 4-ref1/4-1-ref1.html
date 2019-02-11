@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id='div1'></div>
+        <script type='text/babel'>
+            class N extends React.Component{
+                constructor(){
+                    super();
+                }
+                h(){
+                    this.refs.a.focus();
+                    this.b.value='abc';
+                }
+                render(){
+                    return(
+                        <div>
+                            <input type='text' ref='a'/>
+                            <input type='text' ref={(dom)=>{this.b=dom}}/>
+                            <button onClick={this.h.bind(this)}>click</button>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <N/>,
+                document.getElementById('div1')
+            )
+        </script>
+    </body>
+</html>

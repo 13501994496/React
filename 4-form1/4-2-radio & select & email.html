@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id='div1'></div>
+        <script type='text/babel'>
+            class N extends React.Component{
+                constructor(){
+                    super();
+                    this.state={
+                        flag:true,
+                        select:'c',
+                        email:'',
+                        errer:''
+                    }
+                }
+                h(e){
+                    console.log(e.target.value);
+                    this.setState({flag:e.target.value=='man'?true:false,select:e.target.value})
+                }
+                h1(){
+                    alert(JSON.stringify(this.state))
+                }
+                e(e){
+                    var value=e.target.value;
+                    var filter=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                    var errer='';
+                    if(!filter.test(value)){
+                        errer='请输入正确的email';
+                    }
+                    this.setState({
+                        email:value,errer:errer
+                    })
+                }
+                render(){
+                    return(
+                        <div>
+                            <input type='radio' onChange={(e)=>this.h(e)} 
+                                value='man' checked={this.state.flag}/>男
+                            <input type='radio' onChange={(e)=>this.h(e)} 
+                                value='women' checked={!this.state.flag}/>女
+                            <div>
+                               <select value={this.state.select} onChange={(e)=>this.h(e)}>
+                                   <option value='a'>a</option>
+                                   <option value='b'>b</option>
+                                   <option value='c'>c</option>
+                               </select>
+                            </div>
+                            <label>Email:</label>
+                            <input type='text' value={this.state.email} onChange={(e)=>this.e(e)}/>
+                            <span>{this.state.errer}</span>
+                            <br/>
+                            <input type='submit' onClick={()=>this.h1()} value='submit'/>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <N/>,
+                document.getElementById('div1')
+            )
+        </script>
+    </body>
+</html>

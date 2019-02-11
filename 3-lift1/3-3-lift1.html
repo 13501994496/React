@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+        <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id='div1'></div>
+        <script type='text/babel'>
+            class N extends React.Component{
+                constructor(){
+                    super();
+                    this.state={
+                        opacity:1
+                    }
+                }
+                componentDidMount(){
+                    console.log('组件完成挂载')
+                    this.t=setInterval(()=>{
+                    this.state.opacity-=0.05;
+                    if(this.state.opacity<0.1){
+                        this.state.opacity=1
+                    }
+                    this.setState({opacity:this.state.opacity})
+                    },100)
+                }
+                componentWillUnmount(){
+                    console.log('组件移除时调用')
+                    clearInterval(this.t);
+                }
+                render(){
+                    return(
+                        <div style={{opacity:this.state.opacity}}>haha</div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <N/>,
+                document.getElementById('div1')
+            )
+        </script>
+    </body>
+</html>
